@@ -1,12 +1,15 @@
-const BASE_URL = "https://jsonplaceholder.typicode.com"
+const BASE_URL = "https://jsonplaceholder.typicode.com";
 
 export function getTodos() {
-    return fetch(`${BASE_URL}/todos`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Api response fail");
-            }
+    return fetch(`${BASE_URL}/todos`).then((response) => {
+        if (!response.ok) {
+            throw new Error("Api response fail");
+        }
 
-            return response.json();
-        })
+        return response.json();
+    });
+}
+
+export function deleteTodo(id) {
+    fetch(`${BASE_URL}/todos/${id}`, { method: "DELETE" });
 }

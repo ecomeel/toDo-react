@@ -1,11 +1,16 @@
 export default function Todo({
     todo,
-    onDeleteBtnClick
+    onDelete,
+    onToggle
 }) {
     return (
         <div>
             <p>{todo.title}</p>
-            <button onClick={onDeleteBtnClick}>Delete todo</button>
+            <input 
+                type="checkbox"
+                checked={todo.completed}
+                onChange={onToggle} />
+            <button onClick={onDelete}>Delete todo</button>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getTodos } from "./api/todo";
+import { getTodos, deleteTodo } from "./api/todo";
 import { getNormalizedTodos } from "./utils/get-normalized-todos";
 import Todo from "./components/Todo/Todo";
 
@@ -30,8 +30,14 @@ function App() {
         setIsTodosLoading(false);
     }, []);
 
-    function handleDeleteTodoBtnClick(id) {
-        console.log(id)
+    function handleDeleteTodo(id) {
+        setTodosIds(todosIds.filter((todoId) => todoId !== id));
+        deleteTodo(id)
+
+    }
+
+    function handleToggleTodo(id) {
+
     }
 
     return (
@@ -44,7 +50,8 @@ function App() {
                     <Todo
                         key={id}
                         todo={todosById[id]}
-                        onDeleteBtnClick={() => handleDeleteTodoBtnClick(id)}
+                        onToggle={() => handleToggleTodo(id)}
+                        onDelete={() => handleDeleteTodo(id)}
                     />
                 ))}
         </div>
