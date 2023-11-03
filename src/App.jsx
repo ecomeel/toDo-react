@@ -20,7 +20,13 @@ function App() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setIsError(false)
     setIsTodosLoading(true)
+
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(data => console.log(data))
+
     setTodos(mockTodos)
     setIsTodosLoading(false)
   }, []);
