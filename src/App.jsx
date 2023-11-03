@@ -4,7 +4,6 @@ import { getTodos } from "./api/todo";
 import { getNormalizedTodos } from "./utils/get-normalized-todos";
 import Todo from "./components/Todo/Todo";
 
-
 function App() {
     const [todosIds, setTodosIds] = useState(null);
     const [todosById, setTodosById] = useState({});
@@ -17,7 +16,7 @@ function App() {
 
         getTodos()
             .then((todos) => {
-              const [ids, byIds] = getNormalizedTodos(todos)
+                const [ids, byIds] = getNormalizedTodos(todos);
 
                 setIsTodosLoading(false);
                 setTodosIds(ids);
@@ -31,12 +30,23 @@ function App() {
         setIsTodosLoading(false);
     }, []);
 
+    function handleDeleteTodoBtnClick(id) {
+        console.log(id)
+    }
+
     return (
         <div>
             <h1>Список задач</h1>
             {isTodosLoading && <p>Todos Loading</p>}
             {isError && <p>Error has occured</p>}
-            {todosIds && todosIds.map((id) => <Todo todo={todosById[id]}/>)}
+            {todosIds &&
+                todosIds.map((id) => (
+                    <Todo
+                        key={id}
+                        todo={todosById[id]}
+                        onDeleteBtnClick={() => handleDeleteTodoBtnClick(id)}
+                    />
+                ))}
         </div>
     );
 }

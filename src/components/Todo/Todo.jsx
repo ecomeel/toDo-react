@@ -1,9 +1,11 @@
 export default function Todo({
-    todo
+    todo,
+    onDeleteBtnClick
 }) {
     return (
-        <div key={todo.id}>
+        <div>
             <p>{todo.title}</p>
+            <button onClick={onDeleteBtnClick}>Delete todo</button>
         </div>
     )
 }
