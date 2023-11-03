@@ -1,0 +1,13 @@
+.todo {
+    height: 30px;
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+
+}
+.todo button {
+    height: 25px;
+}
+.todo {
+    margin-top: 10px;
+}
