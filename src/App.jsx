@@ -32,12 +32,17 @@ function App() {
 
     function handleDeleteTodo(id) {
         setTodosIds(todosIds.filter((todoId) => todoId !== id));
-        deleteTodo(id)
-
+        deleteTodo(id);
     }
 
     function handleToggleTodo(id) {
-
+        setTodosById({
+            ...todosById,
+            [id]: {
+                ...todosById[id],
+                completed: !todosById[id].completed
+            }
+        })
     }
 
     return (
