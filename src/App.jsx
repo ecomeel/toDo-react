@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getTodos } from "./api/todo";
+import { getNormalizedTodos } from "./utils/get-normalized-todos";
 
 // const mockTodos = [
 //   {
@@ -16,7 +17,8 @@ import { getTodos } from "./api/todo";
 // ]
 
 function App() {
-    const [todos, setTodos] = useState(null);
+    const [todosIds, setTodosIds] = useState(null);
+    const [todosById, setTodosById] = useState({});
     const [isTodosLoading, setIsTodosLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -26,8 +28,11 @@ function App() {
 
         getTodos()
             .then((todos) => {
+              const [ids, byIds] = getNormalizedTodos(todos)
+
                 setIsTodosLoading(false);
-                setTodos(todos);
+                setTodosIds(ids);
+                setTodosById(byIds);
             })
             .catch((error) => {
                 setIsError(true);
@@ -37,14 +42,13 @@ function App() {
         setIsTodosLoading(false);
     }, []);
 
-    console.log(todos);
-
     return (
         <div>
             <h1>Список задач</h1>
             {isTodosLoading && <p>Todos Loading</p>}
             {isError && <p>Error has occured</p>}
-            {todos && todos.map((todo) => <p key={todo.id}>{todo.title}</p>)}
+            {todosIds &&
+                todosIds.map((id) => <p key={id}>{todosById[id].title}</p>)}
         </div>
     );
 }
