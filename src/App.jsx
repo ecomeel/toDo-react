@@ -2,19 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { getTodos } from "./api/todo";
 import { getNormalizedTodos } from "./utils/get-normalized-todos";
+import Todo from "./components/Todo/Todo";
 
-// const mockTodos = [
-//   {
-//     id: 1,
-//     title: 'delectes sd asd',
-//     completed: false
-//   },
-//   {
-//     id: 2,
-//     title: 'ssfd wqr asdas',
-//     completed: false
-//   }
-// ]
 
 function App() {
     const [todosIds, setTodosIds] = useState(null);
@@ -47,8 +36,7 @@ function App() {
             <h1>Список задач</h1>
             {isTodosLoading && <p>Todos Loading</p>}
             {isError && <p>Error has occured</p>}
-            {todosIds &&
-                todosIds.map((id) => <p key={id}>{todosById[id].title}</p>)}
+            {todosIds && todosIds.map((id) => <Todo todo={todosById[id]}/>)}
         </div>
     );
 }
